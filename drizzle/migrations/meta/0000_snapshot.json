@@ -1,0 +1,938 @@
+{
+  "id": "e389dc17-2cea-4bde-a013-d53040197d46",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.TAIKHOAN": {
+      "name": "TAIKHOAN",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "TenTK": {
+          "name": "TenTK",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Email": {
+          "name": "Email",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "MatKhau": {
+          "name": "MatKhau",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "HoTen": {
+          "name": "HoTen",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NgaySinh": {
+          "name": "NgaySinh",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "GioiTinh": {
+          "name": "GioiTinh",
+          "type": "GIOITINH",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'NAM'"
+        },
+        "DiaChi": {
+          "name": "DiaChi",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DienThoai": {
+          "name": "DienThoai",
+          "type": "varchar(11)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "Vaitro": {
+          "name": "Vaitro",
+          "type": "VAITRO",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'SINH VIEN'"
+        },
+        "Avatar": {
+          "name": "Avatar",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "LanDauDangNhap": {
+          "name": "LanDauDangNhap",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "TAIKHOAN_TenTK_unique": {
+          "name": "TAIKHOAN_TenTK_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "TenTK"
+          ]
+        },
+        "TAIKHOAN_Email_unique": {
+          "name": "TAIKHOAN_Email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "Email"
+          ]
+        },
+        "TAIKHOAN_DienThoai_unique": {
+          "name": "TAIKHOAN_DienThoai_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "DienThoai"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.LOPHC": {
+      "name": "LOPHC",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaLHC": {
+          "name": "MaLHC",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TenLHC": {
+          "name": "TenLHC",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SoLuong": {
+          "name": "SoLuong",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaGV": {
+          "name": "MaGV",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaKhoa": {
+          "name": "MaKhoa",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "LOPHC_MaGV_GIANGVIEN_id_fk": {
+          "name": "LOPHC_MaGV_GIANGVIEN_id_fk",
+          "tableFrom": "LOPHC",
+          "tableTo": "GIANGVIEN",
+          "columnsFrom": [
+            "MaGV"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "LOPHC_MaKhoa_KHOA_id_fk": {
+          "name": "LOPHC_MaKhoa_KHOA_id_fk",
+          "tableFrom": "LOPHC",
+          "tableTo": "KHOA",
+          "columnsFrom": [
+            "MaKhoa"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "LOPHC_MaLHC_unique": {
+          "name": "LOPHC_MaLHC_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaLHC"
+          ]
+        },
+        "LOPHC_TenLHC_unique": {
+          "name": "LOPHC_TenLHC_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "TenLHC"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.HOCPHAN": {
+      "name": "HOCPHAN",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaHP": {
+          "name": "MaHP",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TenHP": {
+          "name": "TenHP",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SoTC": {
+          "name": "SoTC",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "SoTiet": {
+          "name": "SoTiet",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "HOCPHAN_MaHP_unique": {
+          "name": "HOCPHAN_MaHP_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaHP"
+          ]
+        },
+        "HOCPHAN_TenHP_unique": {
+          "name": "HOCPHAN_TenHP_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "TenHP"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.KHOA": {
+      "name": "KHOA",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaKhoa": {
+          "name": "MaKhoa",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TenKhoa": {
+          "name": "TenKhoa",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "MoTa": {
+          "name": "MoTa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "KHOA_MaKhoa_unique": {
+          "name": "KHOA_MaKhoa_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaKhoa"
+          ]
+        },
+        "KHOA_TenKhoa_unique": {
+          "name": "KHOA_TenKhoa_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "TenKhoa"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.DIEM": {
+      "name": "DIEM",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaSV": {
+          "name": "MaSV",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaLHP": {
+          "name": "MaLHP",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "DiemCC": {
+          "name": "DiemCC",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "DiemKT1": {
+          "name": "DiemKT1",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "DiemKT2": {
+          "name": "DiemKT2",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "DiemTL": {
+          "name": "DiemTL",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "DiemThi": {
+          "name": "DiemThi",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "DIEM_MaSV_SINHVIEN_id_fk": {
+          "name": "DIEM_MaSV_SINHVIEN_id_fk",
+          "tableFrom": "DIEM",
+          "tableTo": "SINHVIEN",
+          "columnsFrom": [
+            "MaSV"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "DIEM_MaLHP_LOPHP_id_fk": {
+          "name": "DIEM_MaLHP_LOPHP_id_fk",
+          "tableFrom": "DIEM",
+          "tableTo": "LOPHP",
+          "columnsFrom": [
+            "MaLHP"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.LOPHP": {
+      "name": "LOPHP",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaLHP": {
+          "name": "MaLHP",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "TenLHP": {
+          "name": "TenLHP",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "SoLuong": {
+          "name": "SoLuong",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "HocKy": {
+          "name": "HocKy",
+          "type": "HOCKY",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'HOC KY I'"
+        },
+        "NamHoc": {
+          "name": "NamHoc",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NgayBD": {
+          "name": "NgayBD",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "NgayKT": {
+          "name": "NgayKT",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "DaXoa": {
+          "name": "DaXoa",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "NgayXoa": {
+          "name": "NgayXoa",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaHP": {
+          "name": "MaHP",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaGV": {
+          "name": "MaGV",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "LOPHP_MaHP_HOCPHAN_id_fk": {
+          "name": "LOPHP_MaHP_HOCPHAN_id_fk",
+          "tableFrom": "LOPHP",
+          "tableTo": "HOCPHAN",
+          "columnsFrom": [
+            "MaHP"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "LOPHP_MaGV_GIANGVIEN_id_fk": {
+          "name": "LOPHP_MaGV_GIANGVIEN_id_fk",
+          "tableFrom": "LOPHP",
+          "tableTo": "GIANGVIEN",
+          "columnsFrom": [
+            "MaGV"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "LOPHP_MaLHP_unique": {
+          "name": "LOPHP_MaLHP_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaLHP"
+          ]
+        },
+        "LOPHP_TenLHP_unique": {
+          "name": "LOPHP_TenLHP_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "TenLHP"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.SINHVIEN": {
+      "name": "SINHVIEN",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaSV": {
+          "name": "MaSV",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "MaTK": {
+          "name": "MaTK",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaLHC": {
+          "name": "MaLHC",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "SINHVIEN_MaTK_TAIKHOAN_id_fk": {
+          "name": "SINHVIEN_MaTK_TAIKHOAN_id_fk",
+          "tableFrom": "SINHVIEN",
+          "tableTo": "TAIKHOAN",
+          "columnsFrom": [
+            "MaTK"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "SINHVIEN_MaLHC_LOPHC_id_fk": {
+          "name": "SINHVIEN_MaLHC_LOPHC_id_fk",
+          "tableFrom": "SINHVIEN",
+          "tableTo": "LOPHC",
+          "columnsFrom": [
+            "MaLHC"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "SINHVIEN_MaSV_unique": {
+          "name": "SINHVIEN_MaSV_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaSV"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.GIANGVIEN": {
+      "name": "GIANGVIEN",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "MaGV": {
+          "name": "MaGV",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "HocVi": {
+          "name": "HocVi",
+          "type": "HOCVI",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'CU NHAN'"
+        },
+        "ChuyenNganh": {
+          "name": "ChuyenNganh",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "MaTK": {
+          "name": "MaTK",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "MaKhoa": {
+          "name": "MaKhoa",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "NgayTao": {
+          "name": "NgayTao",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "NgayCapNhat": {
+          "name": "NgayCapNhat",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "GIANGVIEN_MaTK_TAIKHOAN_id_fk": {
+          "name": "GIANGVIEN_MaTK_TAIKHOAN_id_fk",
+          "tableFrom": "GIANGVIEN",
+          "tableTo": "TAIKHOAN",
+          "columnsFrom": [
+            "MaTK"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "GIANGVIEN_MaKhoa_KHOA_id_fk": {
+          "name": "GIANGVIEN_MaKhoa_KHOA_id_fk",
+          "tableFrom": "GIANGVIEN",
+          "tableTo": "KHOA",
+          "columnsFrom": [
+            "MaKhoa"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "GIANGVIEN_MaGV_unique": {
+          "name": "GIANGVIEN_MaGV_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "MaGV"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.HOCVI": {
+      "name": "HOCVI",
+      "schema": "public",
+      "values": [
+        "CU NHAN",
+        "THAC SI",
+        "TIEN SI",
+        "PHO GIAO SU",
+        "GIAO SU"
+      ]
+    },
+    "public.GIOITINH": {
+      "name": "GIOITINH",
+      "schema": "public",
+      "values": [
+        "NAM",
+        "NU",
+        "KHAC"
+      ]
+    },
+    "public.VAITRO": {
+      "name": "VAITRO",
+      "schema": "public",
+      "values": [
+        "SINH VIEN",
+        "GIANG VIEN",
+        "QUAN TRI"
+      ]
+    },
+    "public.HOCKY": {
+      "name": "HOCKY",
+      "schema": "public",
+      "values": [
+        "HOC KY I",
+        "HOC KY II"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
