@@ -64,7 +64,7 @@ export const Account = pgTable('TAIKHOAN', {
   dob: date('NgaySinh', { mode: 'date' }).notNull(),
   gender: genderEnum('GioiTinh').default('NAM'),
   address: varchar('DiaChi', { length: 255 }).notNull(),
-  phone: varchar('DienThoai', { length: 11 }).unique().notNull(),
+  phone: varchar('DienThoai', { length: 13 }).unique().notNull(),
   role: roleEnum('Vaitro').default('SINH VIEN'),
   avatar: varchar('Avatar', { length: 255 }),
   isFirstLogin: boolean('LanDauDangNhap').default(true),
