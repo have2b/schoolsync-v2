@@ -25,7 +25,7 @@ async function seedWithTransaction() {
       console.log('💾 Inserting departments...')
       await tx.insert(Department).values(departments)
 
-      console.log('💾 Inserting admin accoutns...')
+      console.log('💾 Inserting admin account...')
       await tx.insert(Account).values([
         {
           username: 'admin',
