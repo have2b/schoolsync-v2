@@ -1,5 +1,17 @@
+import { hash } from 'bcryptjs'
 import { db } from '../connection'
-import { Account, Class, Course, Department, Grade, Seminar, Student, Teacher } from '../schema'
+import {
+  Account,
+  Class,
+  Course,
+  Department,
+  Gender,
+  Grade,
+  Role,
+  Seminar,
+  Student,
+  Teacher,
+} from '../schema'
 import { generateSeedData } from './fake-data'
 
 async function seedWithTransaction() {
@@ -12,6 +24,25 @@ async function seedWithTransaction() {
 
       console.log('💾 Inserting departments...')
       await tx.insert(Department).values(departments)
+
+      console.log('💾 Inserting admin accoutns...')
+      await tx.insert(Account).values([
+        {
+          username: 'admin',
+          email: 'admin@tmu.edu.vn',
+          password: await hash(process.env.ADMIN_PASSWORD!, 10),
+          fullName: 'Admin',
+          dob: new Date('2002-06-15'),
+          gender: Gender.MALE,
+          address: 'Ha Noi',
+          phone: '0867422638',
+          role: Role.ADMIN,
+          avatar: 'https://github.com/have2b.png',
+          isFirstLogin: false,
+          createdAt: new Date('2020-01-01'),
+          updatedAt: new Date('2020-01-01'),
+        },
+      ])
 
       console.log('💾 Inserting accounts...')
       await tx.insert(Account).values(accounts)
