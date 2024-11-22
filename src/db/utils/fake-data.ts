@@ -66,7 +66,7 @@ const logMemoryUsage = () => {
   if (typeof process !== 'undefined') {
     const used = process.memoryUsage()
     console.log('Memory usage:')
-    for (const [key, value] of Object.entries(used)) {
+    for (const [key, value] of Object.entries(used).filter(([key]) => key !== 'arrayBuffers')) {
       console.log(`${key}: ${Math.round((value / 1024 / 1024) * 100) / 100} MB`)
     }
   }
@@ -107,7 +107,7 @@ const generateAccounts = async (count: number = 100): Promise<Account[]> => {
   const accounts = Array.from({ length: count }, (_, i) => ({
     id: uuidv4(),
     username: `${faker.internet.username()}${faker.number.int({ min: 1, max: 999 })}`,
-    email: faker.internet.email({ provider: 'tmu.edu.vn' }),
+    email: `${faker.internet.email({ provider: 'tmu.edu.vn' })}${faker.number.int({ min: 1, max: 999 })}`,
     password: hashedPassword,
     fullName: faker.person.fullName(),
     dob: faker.date.between({ from: '1990-01-01', to: '2003-12-31' }),
@@ -163,7 +163,7 @@ const generateClasses = async (
   const randomValues = preGenerateRandomValues(count)
   const teacherIds = teachers.map((t) => t.id)
   const departmentIds = departments.map((d) => d.id)
-  const possibleElements = Array.from({ length: 20 }, () => faker.science.chemicalElement())
+  const possibleElements = Array.from({ length: 100 }, () => faker.science.chemicalElement())
   const sections = ['A', 'B', 'C', 'D', 'E']
 
   const classes = Array.from({ length: count }, (_, i) => ({
@@ -209,7 +209,10 @@ const generateCourses = async (count: number = 15): Promise<Course[]> => {
   console.log('Generating courses...')
   const codes = generateSequentialCodes('HP', 1, count, 4)
   const randomValues = preGenerateRandomValues(count)
-  const preGeneratedJobTitles = Array.from({ length: count }, () => faker.person.jobTitle())
+  const preGeneratedJobTitles = Array.from(
+    { length: count },
+    () => `${faker.person.jobTitle()} - ${faker.number.int({ min: 1, max: 999 })}`
+  )
 
   const courses = Array.from({ length: count }, (_, i) => ({
     id: uuidv4(),

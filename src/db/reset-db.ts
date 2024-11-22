@@ -10,6 +10,7 @@ const resetDatabase = async () => {
     user: DB_USERNAME,
     password: DB_PASSWORD,
     database: 'postgres',
+    ssl: true,
   })
 
   try {
